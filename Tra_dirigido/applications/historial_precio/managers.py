@@ -9,7 +9,7 @@ class Historial_Manager(models.Manager):
             ).order_by('date', 'price')
         else:
             lista = []
-        print('lista resultados: ', lista)
+        #print('lista resultados: ', lista)
         return lista
     def Consultar_histori_producto(self,kword):
         lista = self.filter(

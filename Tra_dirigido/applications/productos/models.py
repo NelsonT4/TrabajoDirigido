@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 
+#from .mangers import Productos_Manager
+
 class Productos(models.Model):
     productId = models.IntegerField('ProductId', unique=True, auto_created=False )
     store = models.CharField('Almacen', max_length=20)
@@ -15,6 +17,8 @@ class Productos(models.Model):
         verbose_name = 'Productos'
         verbose_name_plural = "Productos"
         unique_together = ('productId', 'store')
+
+    #objects = Productos_Manager()
     def __str__(self):
         return (str(self.productId) + '-' +
                 str(self.store) + '-' +

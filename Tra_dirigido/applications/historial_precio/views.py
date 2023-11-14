@@ -25,4 +25,3 @@ class ListaHistorial(ListView):
      def get_queryset(self):
           productId =self.kwargs['id']
           return Historial_precio.objects.Consultar_histori_producto(productId)
-
