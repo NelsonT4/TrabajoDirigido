@@ -13,14 +13,8 @@ class ListaHistorialPrecio(ListView):
      def get_queryset(self):
           print('***')
           palabra_clave = self.request.GET.get('kword', '')
-          if palabra_clave:
-               lista = Historial_precio.objects.filter(
-                    Q(productId__name__icontains=palabra_clave) | Q(productId__name__iexact=palabra_clave)
-               )
-          else:
-               lista=[]
-          print('lista resultados: ', lista)
-          return lista
+
+          return Historial_precio.objects.Consultar_Historial(palabra_clave)
 
 class ListaHistorial(ListView):
      template_name = 'historial_precio/historial.html'
@@ -30,8 +24,5 @@ class ListaHistorial(ListView):
 
      def get_queryset(self):
           productId =self.kwargs['id']
-          lista = Historial_precio.objects.filter(
-               productId__id=productId
-          ).order_by('-date')
-          return lista
+          return Historial_precio.objects.Consultar_histori_producto(productId)
 

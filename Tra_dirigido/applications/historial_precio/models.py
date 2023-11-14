@@ -3,7 +3,9 @@ from applications.productos.models import Productos
 
 # Create your models here.
 
+#Manager
 
+from .managers import Historial_Manager
 class Historial_precio(models.Model):
     productId = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name="producto")
     date = models.DateField('Fecha Consulta', auto_now_add=True)
@@ -12,6 +14,8 @@ class Historial_precio(models.Model):
 
     class Meta:
         verbose_name = 'Historial Precio'
+
+    objects = Historial_Manager()
 
     def __str__(self):
         return (str(self.productId) + '-' +
