@@ -43,7 +43,7 @@
                             <td>{{producto_item.describe}}</td>
                             <td>{{producto_item.basicNeed}}</td>
                             <td>{{precio}}</td>
-                            <td><a class="button warning" href="{% url 'historial_app:historia' producto_item.id %}">Ver Historial</a></td>
+                            <td><a class="button warning" href="{% url 'historial_app:historia' producto_item.productId %}">Ver Historial</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

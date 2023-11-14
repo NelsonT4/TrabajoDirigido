@@ -13,6 +13,6 @@ class Historial_Manager(models.Manager):
         return lista
     def Consultar_histori_producto(self,kword):
         lista = self.filter(
-            productId__id=kword
+            productId__productId=kword
         ).order_by('-date')
         return lista

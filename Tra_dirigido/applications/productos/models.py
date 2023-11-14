@@ -2,10 +2,10 @@ from django.db import models
 
 # Create your models here.
 
-#from .mangers import Productos_Manager
+
 
 class Productos(models.Model):
-    productId = models.IntegerField('ProductId', unique=True, auto_created=False )
+    productId = models.IntegerField('Id', primary_key=True,auto_created=False )
     store = models.CharField('Almacen', max_length=20)
     name = models.CharField('Nombre', max_length=100)
     category = models.CharField('Categoria', max_length=100)
@@ -18,7 +18,6 @@ class Productos(models.Model):
         verbose_name_plural = "Productos"
         unique_together = ('productId', 'store')
 
-    #objects = Productos_Manager()
     def __str__(self):
         return (str(self.productId) + '-' +
                 str(self.store) + '-' +

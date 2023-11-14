@@ -13,7 +13,6 @@ class  ProductosAdmin(admin.ModelAdmin):
         'make',
         'describe',
         'basicNeed',
-        'id',
     )
 
 
