@@ -1,10 +1,10 @@
 from django.db import models
-from applications.usuarios.models import Usuarios
+from applications.users.models import User
 from applications.productos.models import Productos
 
 # Create your models here.
 class Productos_Seleccionados(models.Model):
-    userId = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
     productId = models.ForeignKey(Productos, on_delete=models.CASCADE)
 
     class Meta:
