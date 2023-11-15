@@ -8,4 +8,8 @@ urlpatterns = [
          views.getProductoByPrice.as_view(),
          name="producto"
          ),
+    path('ProductsSave/',
+         views.SaveProducts.as_view(),
+         name="producto-save"
+         ),
 ]

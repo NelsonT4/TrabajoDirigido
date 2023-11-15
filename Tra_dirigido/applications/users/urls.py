@@ -10,7 +10,10 @@ urlpatterns = [
     path('index/',
          views.HomeUserView.as_view(),
          name='index'),
-path('loginUser/',
+    path('loginUser/',
          views.LoginUser.as_view(),
          name='user-login'),
+    path('logOut/',
+         views.LogoutView.as_view(),
+         name='user-logOut'),
 ]

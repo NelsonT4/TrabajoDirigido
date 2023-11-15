@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 # Create your views here.
 from django.views.generic import (
     FormView,
-    TemplateView
+    TemplateView,
+    View,
 )
 from .forms import UserRegisterForm, LoginForm
 from .models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 
 class UserRegisterView(FormView):
     template_name = "usuarios/register.html"
@@ -38,3 +40,12 @@ class LoginUser(FormView):
         )
         login(self.request, user)
         return super(LoginUser, self).form_valid(form)
+
+class LogoutView(View):
+    def get(self, request, *arg, **kargs):
+        logout(request)
+        return HttpResponseRedirect(
+            reverse(
+                'user_app : user-login'
+        )
+        )

@@ -9,7 +9,7 @@ class Productos(models.Model):
     store = models.CharField('Almacen', max_length=20)
     name = models.CharField('Nombre', max_length=100)
     category = models.CharField('Categoria', max_length=100)
-    make = models.CharField('marca', max_length=20)
+    make = models.CharField('marca', max_length=50)
     describe = models.CharField('Descripción', max_length=100, null=True)
     basicNeed = models.BooleanField('Nececidad Basica', max_length=1, null=True)
 

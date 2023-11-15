@@ -9,7 +9,7 @@ from .managers import Historial_Manager
 class Historial_precio(models.Model):
     productId = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name="producto")
     date = models.DateField('Fecha Consulta', auto_now_add=True)
-    price = models.DecimalField('Precio', max_digits=10, decimal_places=2)
+    price = models.DecimalField('Precio', max_digits=10, decimal_places=2, null=True)
     priceUnit = models.DecimalField('Precio Unidad', max_digits=10, decimal_places=2, null=True)
 
     class Meta:
