@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     'applications.historial_precio',
     'applications.productos',
     'applications.productos_seleccionados',
-    'applications.usuarios',
     'applications.users',
 ]
 

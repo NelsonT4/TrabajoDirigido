@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from pip._internal.network.session import user_agent
+
+from applications.productos_seleccionados.models import Productos_Seleccionados
+from applications.productos.models import Productos
 from django.urls import reverse_lazy, reverse
 from django.views.generic import (
     FormView,
@@ -15,6 +20,8 @@ from .forms import (
     UpdatePasswordForm
 )
 from .models import User
+
+
 
 # Create your views here.
 class UserRegisterView(FormView):
@@ -73,4 +80,27 @@ class UpdatePasswordView(FormView):
             usuario.save()
         logout(self.request)
         return super(UpdatePasswordView, self).form_valid(form)
+
+"""class getProductsUser(View):
+    template_name='users/productsUser.html'
+
+    def get(self,requests):
+        if requests.user.is_authenticated:
+            username = requests.user.username
+
+            usuario = User.objects.get_by_natural_key(user_agent())
+
+            products_by_user = usuario.products_user.all()
+
+            context = {'productos':products_by_user}
+
+            return render(requests,self.template_name,context)"""
+
+
+
+
+
+
+
+
 

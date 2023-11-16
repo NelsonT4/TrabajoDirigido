@@ -10,7 +10,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('productos', '0001_initial'),
-        ('usuarios', '0001_initial'),
     ]
 
     operations = [
@@ -19,7 +18,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('productId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='productos.productos')),
-                ('userId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='usuarios.usuarios')),
             ],
             options={
                 'verbose_name': 'Productos Seleccionados',

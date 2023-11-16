@@ -20,18 +20,16 @@
                     <table>
                       <thead>
                         <tr>
-                            <th style="width:100px;">ID</th>
+                            <th style="width:100px;">ID Producto</th>
                             <th style="width:50px;">Almacen</th>
-                            <th style="width:100px;">Nombre</th>
-                            <th style="width:150px;">Categoria</th>
+                            <th style="width:150px;">Nombre</th>
+                            <th style="width:50px;">Categoria</th>
                             <th style="width:50px;">Marca</th>
                             <th style="width:150px";>Descripción</th>
                             <th style="width:20px;">Primera Nececidad</th>
                             <th style="width:50px;">Precio</th>
-                            <th style="width:50px;">Historial<th>
+                            <th style="width:150px;">Historial<th>
                             <th style="width:150px;"><th>
-
-
                         </tr>
                       </thead>
                       <tbody>
@@ -46,7 +44,8 @@
                             <td>{{producto_item.basicNeed}}</td>
                             <td>{{precio}}</td>
                             <td><a class="button warning" href="{% url 'historial_app:historia' producto_item.productId %}">Ver Historial</a></td>
-                            <td><a class="button success" href="{% url 'productosSeleccionado_app:producto-seleccionados' producto_item.productId %}">Registrar</a></td>
+                            <td><a class="button succes" href="{% url 'historial_app:historia' producto_item.productId %}">Registrar</a></td>
+
                         </tr>
                         {% endfor %}
                       </tbody>

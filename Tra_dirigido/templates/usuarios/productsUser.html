@@ -1,0 +1,17 @@
+<!-- templates/tuapp/lista_productos.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos del usuario</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+
+    <ul>
+        {% for producto in productos %}
+            <li>{{ producto.nombre }} - {{ producto.precio }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

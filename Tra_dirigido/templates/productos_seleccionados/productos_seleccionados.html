@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos Seleccionado</title>
+</head>
+<body>
+    <h1>
+        Productos Seleccionados
+    </h1>
+    <ul>
+        {% for producto in ProductosSelecionados %}
+            <li>{{ producto}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('applications.historial_precio.urls')),
     path('', include('applications.productos.urls')),
-    #path('', include('applications.productos_seleccionados.urls')),
-    path('', include('applications.usuarios.urls')),
+    path('', include('applications.productos_seleccionados.urls')),
+    #path('', include('applications.usuarios.urls')),
     re_path('', include('applications.users.urls')),
 ]
