@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home Usuario</title>
-</head>
-<body>
-    <h1>Panel Usuario</h1>
-    <h3>Bienvenido:</h3>
-    <ul>
-        <li><a href="{% url 'users_app:user-logOut%}">Cerrar Sesion</a></li>
-        <li><a href="#">Acualizar Datos</a></li>
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Home Usuario
+{% endblock title %}
+
+{% block content%}
+    {% include 'includes/header.html'%}
+    <div class="grid-container" style="height: 100vh;">
+        <div class="grid-x align-center-middle" style="height: 100%;">
+            <div class="cell large-8 text-center">
+                <h1>Panel Usuario</h1>
+            </div>
+            <div class="cell large-8">
+                <h3>Bienvenido: {{user}}</h3>
+                <ul>
+                    <li><a href="{% url 'users_app:user-logOut' %}">Cerrar Sesion</a></li>
+                    <li><a href="#">Acualizar Datos</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

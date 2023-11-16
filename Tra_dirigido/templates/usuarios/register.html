@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrar Nuevo Usuario</title>
-</head>
-<body>
-    <h1>Registrar Nuevo Usuario</h1>
-    <form method="POST"> {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Registrar</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Nuevo Usuario
+{% endblock title %}
+
+{% block content%}
+    <div class="grid-container" style="height: 100vh;">
+        <div class="grid-x align-center-middle" style="height: 100%;">
+                <div class="cell large-4">
+                    <h1>Registrar Nuevo Usuario</h1>
+                </div>
+                <div class="cell large-4 text-center">
+                    <form method="POST">
+                    {% csrf_token %}
+                    <div>
+                        {{ form.as_p }}
+                        <button type="submit" class="button expanded">Registrar</button>
+                    </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

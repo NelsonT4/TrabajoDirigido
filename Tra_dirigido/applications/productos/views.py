@@ -13,6 +13,8 @@ from .ScrapyPages.DUno import cargarProductosD1
 from .ScrapyPages.productosExito import cargarProductosExito
 from .ScrapyPages.jumbo import cargarProductosJumbo
 
+
+
 class getProductoByPrice(ListView):
     template_name = "productos/getProducto.html"
     paginate_by = 20
@@ -44,9 +46,9 @@ class getProductoByPrice(ListView):
         return resultados
 class SaveProducts(View):
     template_inicio = "productos/getProductsByPrice.html"
-    template_respuesta = "productos/viewCompareProducts.html"
+    template_respuesta = "productos/ChargueResult.html"
 
-    def get (self, requests):
+    def get(self, requests):
         producto_a_buscar = requests.GET.get('kword')
 
         if not producto_a_buscar:
@@ -55,14 +57,25 @@ class SaveProducts(View):
             productos_a_buscar = producto_a_buscar.split(",")
 
             cargarProductosExito(productos_a_buscar)
-            #
+
             cargarProductosD1()
 
-            #cargarProductosJumbo()
+            cargarProductosJumbo()
 
+            resultado_busqueda = (f"Se guardaron exitosamente los productos de  '{producto_a_buscar} de exito"
+                                  f" y todos los de D1 y jumbo'")
 
+            return render(requests, self.template_respuesta, {'resultadoCargue': resultado_busqueda})
 
-            resultado_busqueda = f"Se guardaron exitosamente los productos de  '{producto_a_buscar}'"
+class BorrarDatos(View):
+    template_respuesta = "productos/ChargueResult.html"
 
+    def get(self, requests):
+        requests.GET
 
-            return render(requests, self.template_respuesta)
+        Productos.objects.all().delete()
+        Historial_precio.objects.all().delete()
+
+        resultado_busqueda = f"Se borraron de manera exitosa los datos de las tablas Productos e Historial"
+
+        return render(requests, self.template_respuesta, {'resultadoCargue': resultado_busqueda})

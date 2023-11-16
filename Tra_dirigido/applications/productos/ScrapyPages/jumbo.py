@@ -66,12 +66,15 @@ def cargarProductosJumbo():
 
     categorias = obtener_categorias()
     Total_Productos = []
+
+
+
     for categoria in categorias:
         url_referecia =  "https://www.tiendasjumbo.co" + categoria["slug"]
         maps = ""
         query = categoria["slug"][1:]
         value_keys = query.split("/")
-
+        session = requests.Session()
         selectedFacets = []
         for value_key in value_keys:
             maps += "," + "c"
@@ -89,10 +92,11 @@ def cargarProductosJumbo():
         variables["selectedFacets"]=selectedFacets
 
         num_productos = 100
-        tam_bloque = 99
+        tam_bloque = 20
         inicio = 0
 
         while inicio < num_productos:
+
             fin = min(inicio + tam_bloque, num_productos)
 
             variables["from"]=inicio
@@ -112,7 +116,7 @@ def cargarProductosJumbo():
             url_api = url_api.replace("%27", "%22")
             #print(url_api)
             try :
-                response = requests.get(url_api, headers=headers)
+                response = session.get(url_api, headers=headers)
                 data = response.json()
 
                 productos = data.get("data", {}).get("productSearch", {}).get("products", [])

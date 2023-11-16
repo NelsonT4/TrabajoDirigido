@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import User
+from django.contrib.auth import authenticate
 
 
 class UserRegisterForm(forms.ModelForm):
@@ -14,7 +15,7 @@ class UserRegisterForm(forms.ModelForm):
         )
     )
     password2 = forms.CharField(
-        label='Contraseña',
+        label='Repetir Contraseña',
         required=True,
         widget=forms.PasswordInput(
             attrs={
@@ -43,7 +44,7 @@ class LoginForm(forms.Form):
             }
         )
     )
-    password2 = forms.CharField(
+    password = forms.CharField(
         label='Contraseña',
         required=True,
         widget=forms.PasswordInput(
@@ -52,3 +53,11 @@ class LoginForm(forms.Form):
             }
         )
     )
+    def  clean(self):
+        cleaned_data = super(LoginForm,self).clean()
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        if not authenticate(username=username , password=password):
+            raise forms.ValidationError("Los datos de  usurio no son correctos")
+
+        return self.cleaned_data

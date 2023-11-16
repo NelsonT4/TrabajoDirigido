@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Acceder al sistema</h1>
-    <form method="POST">
-        {{form.as_p}}
-        <button type="submit">Acceder</button>
-    </form>{% csrf_token %}
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Acceder al Sistema
+{% endblock title %}
 
-</body>
-</html>
+{% block content%}
+    <div class="grid-container" style="height: 100vh;">
+        <div class="grid-x align-center-middle" style="height: 100%;">
+            <div class="cell large-8 text-center">
+                <h1>Acceder al sistema</h1>
+            </div>
+            <div class="cell large-4 text-center">
+                <form method="POST">{% csrf_token %}
+                    <div>
+                        {{ form.as_p }}
+                        <button type="submit" class="button expanded">Acceder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

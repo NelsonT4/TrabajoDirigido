@@ -13,11 +13,13 @@ def saveProductsAndPrices(listaProductosRepeat):
     for producto in listaProductos:
 
         if producto["almacen"] == "Exito":
-            product_object = Productos(producto["id"], producto["almacen"], producto["descripcion"], producto["categoria"],producto["marca"], producto["descripcion"][:100], )
+            product_object = Productos(producto["id"], producto["almacen"], producto["descripcion"][:100], producto["categoria"],producto["marca"], producto["descripcion"][:100], )
         else:
-            product_object = Productos(producto["id"], producto["almacen"], producto["nombre"],producto["categoria"],producto["marca"], producto["descripcion"][:100], )
+            product_object = Productos(producto["id"], producto["almacen"], producto["nombre"][:100],producto["categoria"],producto["marca"], producto["descripcion"][:100], )
 
-        productObjects.append(product_object)
+        producto_insertar = Productos.objects.filter(productId=producto["id"],store=producto["almacen"])
+        if not producto_insertar.exists():
+            productObjects.append(product_object)
 
         if producto["almacen"] == "Exito":
             history_prices_object = Historial_precio(productId=product_object, price=producto["precio"],priceUnit=producto["precio"])
@@ -30,10 +32,12 @@ def saveProductsAndPrices(listaProductosRepeat):
 
     try:
         with transaction.atomic():
-            Productos.objects.bulk_create(productObjects)
+            if productObjects:
+                Productos.objects.bulk_create(productObjects)
             Historial_precio.objects.bulk_create(historyPricesObjects)
     except Exception as e:
         logger.error(f"Error al ejecutar bulk_create: {e}")
+
 
 
 def delProductsRepeated(lista):

@@ -12,4 +12,7 @@ urlpatterns = [
          views.SaveProducts.as_view(),
          name="producto-save"
          ),
+    path('DelData/',
+         views.BorrarDatos.as_view(),
+         name="Delete"),
 ]
