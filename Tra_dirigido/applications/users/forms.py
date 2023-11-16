@@ -6,10 +6,10 @@ from django.contrib.auth import authenticate
 
 class UserRegisterForm(forms.ModelForm):
     password1 = forms.CharField(
-        label = 'Contraseña',
+        label='Contraseña',
         required=True,
         widget=forms.PasswordInput(
-            attrs= {
+            attrs={
                 'placeholder': 'Contraseña'
             }
         )
@@ -39,6 +39,7 @@ class LoginForm(forms.Form):
         required=True,
         widget=forms.TextInput(
             attrs={
+                'class': 'input-group-field',
                 'placeholder': 'Username',
                 'style': '{margin: 10px}',
             }
@@ -49,10 +50,21 @@ class LoginForm(forms.Form):
         required=True,
         widget=forms.PasswordInput(
             attrs={
+                'class': 'input-group-field',
                 'placeholder': 'Contraseña',
             }
         )
     )
+    def clean(self):
+        cleaned_data = super(LoginForm, self).clean()
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        usuario=authenticate(username=username, password=password)
+        print(usuario)
+        if not authenticate(username=username, password=password):
+            raise forms.ValidationError('Los datos de usuario no son correctos')
+
+        return cleaned_data
 
 class UpdatePasswordForm(forms.Form):
     password1 = forms.CharField(

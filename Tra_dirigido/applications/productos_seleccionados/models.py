@@ -12,6 +12,7 @@ class Productos_Seleccionados(models.Model):
         verbose_name = 'Productos Seleccionados'
         unique_together = ('userId', 'productId')
 
+
     def __str__(self):
         return (str(self.userId) + '-' +
                 str(self.productId))

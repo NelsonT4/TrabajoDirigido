@@ -45,8 +45,14 @@
                             <td>{{producto_item.describe}}</td>
                             <td>{{producto_item.basicNeed}}</td>
                             <td>{{precio}}</td>
-                            <td><a class="button warning" href="{% url 'historial_app:historia' producto_item.productId %}">Ver Historial</a></td>
-                            <td><a class="button success" href="{% url 'productosSeleccionado_app:producto-seleccionados' producto_item.productId %}">Registrar</a></td>
+                            <td>
+                                <a class="button warning" href="{% url 'historial_app:historia' producto_item.productId %}">Ver Historial</a>
+                            </td>
+                            <td>
+                                <form method="POST" action="{% url 'productosSeleccionado_app:producto-seleccionados' producto_item.productId %}">{% csrf_token %}
+                                    <button type="submit" class="button success">Favorito</button>
+                                </form>
+                            </td>
                         </tr>
                         {% endfor %}
                       </tbody>

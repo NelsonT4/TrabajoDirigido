@@ -4,6 +4,9 @@ from . import views
 app_name = 'users_app'
 
 urlpatterns = [
+    path('',
+         views.HomeIndex.as_view(),
+         name='inicio'),
     path('register/',
          views.UserRegisterView.as_view(),
          name='user-register'),

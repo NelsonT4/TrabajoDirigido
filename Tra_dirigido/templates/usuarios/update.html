@@ -8,7 +8,7 @@
     <div class="grid-container" style="height: 100vh;">
         <div class="grid-x align-center-middle" style="height: 100%;">
             <div class="cell large-8 text-center">
-                <h1>Cambiar Contraseña: {{user}}</h1>
+                <h1>Cambiar Contraseña: {{user.username}}</h1>
             </div>
             <div class="cell large-4 text-center">
                 <form method="POST">{% csrf_token %}

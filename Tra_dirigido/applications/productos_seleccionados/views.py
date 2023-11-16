@@ -1,34 +1,28 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic  import FormView
-from .models import Productos_Seleccionados
+from django.views import View
+from django.views.generic import DetailView
+from .models import Productos_Seleccionados, Productos
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 # Create your views here.
 
 
-class IndexView(FormView):
-    template_name = "productos_seleccionados/productos_seleccionados.html"
-    paginate_by = 20
-    context_object_name = 'ProductosSelecionados'
-    def form_valid(self):
-        productId = self.kwargs['id']
-        print(productId)
-        """usuario = self.request.user
+class IndexView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('users_app:user-login')
+    def post(self, request, *args, **kwargs):
+        usuario = get_user_model().objects.get(pk=request.user.id)
         print(usuario)
-        user = authenticate(
-            username=usuario.id,
+        producto = Productos.objects.get(productId=self.kwargs['pk'])
+        Productos_Seleccionados.objects.create(
+            userId=usuario,
+            productId=producto,
         )
-        producto_seeccionado = []
-        if user:
-            producto_seeccionado = Productos_Seleccionados(
-                userId=usuario.id,
-                productId=productId,
+
+        return HttpResponseRedirect(
+            reverse(
+                'users_app:index'
             )
-            producto_seeccionado.save()"""
-        return []
-
-
-
-
-
-
+        )
