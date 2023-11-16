@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Cambiar Contraseña
+{% endblock title %}
+
+{% block content%}
+    <div class="grid-container" style="height: 100vh;">
+        <div class="grid-x align-center-middle" style="height: 100%;">
+            <div class="cell large-8 text-center">
+                <h1>Cambiar Contraseña: {{user}}</h1>
+            </div>
+            <div class="cell large-4 text-center">
+                <form method="POST">{% csrf_token %}
+                    <div>
+                        {{ form.as_p }}
+                        <button type="submit" class="button expanded">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

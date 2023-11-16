@@ -4,8 +4,12 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.views import View
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.db.models import Q
+
+
 from .models import Productos
 from applications.historial_precio.models import Historial_precio
 
@@ -15,10 +19,11 @@ from .ScrapyPages.jumbo import cargarProductosJumbo
 
 
 
-class getProductoByPrice(ListView):
+class getProductoByPrice(LoginRequiredMixin, ListView):
     template_name = "productos/getProducto.html"
     paginate_by = 20
     context_object_name = 'Productos'
+    login_url = reverse_lazy('users_app:user-login')
 
     def get_queryset(self):
         palabra_clave = self.request.GET.get('kword', '')
@@ -30,11 +35,9 @@ class getProductoByPrice(ListView):
             for producto in lista_productos:
                 precio = Historial_precio.objects.filter(
                     productId=producto
-                ).order_by('-date').values('price').first()
+                ).order_by('-date').values('price').exclude(price=None).first()
                 if precio:
                     resultados.append((producto, precio['price']))
-                else:
-                    resultados.append((producto, None))
             resultados.sort(key=lambda x: x[1] if x[1] is not None else decimal.Decimal(0))
 
         else:
@@ -42,12 +45,12 @@ class getProductoByPrice(ListView):
 
         #print('lista resultados: ', lista_productos)
         #print('precios: ', precio)
-        print('resultados', resultados)
+        #print('resultados', resultados)
         return resultados
-class SaveProducts(View):
+class SaveProducts(LoginRequiredMixin, View):
     template_inicio = "productos/getProductsByPrice.html"
     template_respuesta = "productos/ChargueResult.html"
-
+    login_url = reverse_lazy('users_app:user-login')
     def get(self, requests):
         producto_a_buscar = requests.GET.get('kword')
 
@@ -67,9 +70,9 @@ class SaveProducts(View):
 
             return render(requests, self.template_respuesta, {'resultadoCargue': resultado_busqueda})
 
-class BorrarDatos(View):
+class BorrarDatos(LoginRequiredMixin, View):
     template_respuesta = "productos/ChargueResult.html"
-
+    login_url = reverse_lazy('users_app:user-login')
     def get(self, requests):
         requests.GET
 
