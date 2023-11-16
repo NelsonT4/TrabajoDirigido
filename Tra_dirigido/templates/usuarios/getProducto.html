@@ -45,7 +45,6 @@
                             <td>{{precio}}</td>
                             <td><a class="button warning" href="{% url 'historial_app:historia' producto_item.productId %}">Ver Historial</a></td>
                             <td><a class="button succes" href="{% url 'historial_app:historia' producto_item.productId %}">Registrar</a></td>
-
                         </tr>
                         {% endfor %}
                       </tbody>
@@ -75,7 +74,7 @@
 
                               {% if page_obj.has_next%}
                                 <li class="pagination-next">
-                                    <a href="?page={{page_obj.next_page_number}}&kword={{ request.GET.kword }}&csrfmiddlewaretoken={{ csrf_token }}">atras</a>
+                                    <a href="?page={{page_obj.next_page_number}}&kword={{ request.GET.kword }}&csrfmiddlewaretoken={{ csrf_token }}">Siguiente</a>
                                 </li>
                               {% endif %}
 

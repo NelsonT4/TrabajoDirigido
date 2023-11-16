@@ -2,7 +2,7 @@ from django.db import models
 from applications.users.models import User
 from applications.productos.models import Productos
 
-
+from .managers import ProductosSelecionaadosManager
 # Create your models here.
 class Productos_Seleccionados(models.Model):
     userId = models.ForeignKey(User, on_delete=models.CASCADE, )
@@ -12,7 +12,7 @@ class Productos_Seleccionados(models.Model):
         verbose_name = 'Productos Seleccionados'
         unique_together = ('userId', 'productId')
 
-
+    objects = ProductosSelecionaadosManager()
     def __str__(self):
         return (str(self.userId) + '-' +
                 str(self.productId))

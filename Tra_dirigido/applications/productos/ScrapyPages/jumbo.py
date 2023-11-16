@@ -66,9 +66,6 @@ def cargarProductosJumbo():
 
     categorias = obtener_categorias()
     Total_Productos = []
-
-
-
     for categoria in categorias:
         url_referecia =  "https://www.tiendasjumbo.co" + categoria["slug"]
         maps = ""

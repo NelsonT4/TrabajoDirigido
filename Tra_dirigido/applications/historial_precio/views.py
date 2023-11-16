@@ -27,5 +27,5 @@ class ListaHistorial(LoginRequiredMixin, ListView):
      login_url = reverse_lazy('users_app:user-login')
 
      def get_queryset(self):
-          productId =self.kwargs['id']
+          productId=self.kwargs['id']
           return Historial_precio.objects.Consultar_histori_producto(productId)

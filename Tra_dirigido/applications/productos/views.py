@@ -35,7 +35,7 @@ class getProductoByPrice(LoginRequiredMixin, ListView):
             for producto in lista_productos:
                 precio = Historial_precio.objects.filter(
                     productId=producto
-                ).order_by('-date').values('price').exclude(price=None).first()
+                ).order_by('-date').values('price').exclude(price=None).exclude(price=0).first()
                 if precio:
                     resultados.append((producto, precio['price']))
             resultados.sort(key=lambda x: x[1] if x[1] is not None else decimal.Decimal(0))

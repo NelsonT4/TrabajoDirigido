@@ -2,6 +2,7 @@ from django.db import transaction
 import logging
 from applications.productos.models import Productos
 from applications.historial_precio.models import Historial_precio
+from django.db import IntegrityError
 
 
 def saveProductsAndPrices(listaProductosRepeat):
@@ -32,9 +33,20 @@ def saveProductsAndPrices(listaProductosRepeat):
 
     try:
         with transaction.atomic():
-            if productObjects:
-                Productos.objects.bulk_create(productObjects)
-            Historial_precio.objects.bulk_create(historyPricesObjects)
+            for product_object in productObjects:
+                try:
+                    product_object.save()
+                except Exception as e:
+                    # Manejar la excepción de clave única violada (puedes personalizar según tus necesidades)
+                    logger.warning(f"Error al insertar producto {product_object}: {e}")
+
+            for history_prices_object in historyPricesObjects:
+                try:
+                    history_prices_object.save()
+                except Exception as e:
+                    # Manejar la excepción de clave única violada (puedes personalizar según tus necesidades)
+                    logger.warning(f"Error al insertar historial de precios {history_prices_object}: {e}")
+
     except Exception as e:
         logger.error(f"Error al ejecutar bulk_create: {e}")
 
