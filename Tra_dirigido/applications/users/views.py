@@ -74,7 +74,7 @@ class UpdatePasswordView(FormView):
     success_url = reverse_lazy("users_app:user-login")
     def form_valid(self, form):
         usuario = self.request.user
-        user = authenticate(self.requests,
+        user = authenticate(
             username=usuario.username,
             password=form.cleaned_data['password1']
         )
@@ -85,20 +85,6 @@ class UpdatePasswordView(FormView):
         logout(self.request)
         return super(UpdatePasswordView, self).form_valid(form)
 
-"""class getProductsUser(View):
-    template_name='users/productsUser.html'
-
-    def get(self,requests):
-        if requests.user.is_authenticated:
-            username = requests.user.username
-
-            usuario = User.objects.get_by_natural_key(user_agent())
-
-            products_by_user = usuario.products_user.all()
-
-            context = {'productos':products_by_user}
-
-            return render(requests,self.template_name,context)"""
 
 
 
