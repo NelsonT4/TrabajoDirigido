@@ -12,7 +12,6 @@ def cargarProductosD1():
         "Referer": "",
         "User-Agent": "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
         "content-type": "application/json"
-        #"X-Goog-Api-Key": "AIzaSyDIx3k5l142QNUDito5bsxVdRsSj2LA8gk"
         }
     query = """
           query GetProductsByCategory(

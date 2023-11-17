@@ -22,13 +22,12 @@ class IndexView(LoginRequiredMixin, View):
         ).exists()
 
         if not productos_seleccionados_exists:
-            # Si no existe, crea una nueva entrada
             Productos_Seleccionados.objects.create(
                 userId=usuario,
                 productId=producto,
             )
         return HttpResponseRedirect(
-            reverse('users_app:index')
+            reverse('productosSeleccionado_app:favoritos')
         )
 class ConsultarFavoritos(LoginRequiredMixin, ListView):
 
